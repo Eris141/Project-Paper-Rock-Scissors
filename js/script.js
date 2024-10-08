@@ -19,7 +19,13 @@ function getComputerChoice() {
 //create a function that takes choice
 function getHumanChoice() {
   //ask the user to put the choice
-  let choice = prompt("Enter your choice here.", "").toLowerCase();
+  let choice = prompt("Enter your choice here.", "");
+
+  if (choice !== null) {
+    choice = choice.toLowerCase()
+  } else { 
+    console.log("was canceled");
+  }
   // console.log(choice);
   //check if the user has put the correct choice
   if (choice === "") {
