@@ -17,14 +17,14 @@ function getComputerChoice() {
 
 
 //create a function that takes choice
-function getHumanChoice() {
+function getHumanChoice(choice) {
   //ask the user to put the choice
-  let choice = prompt("Enter your choice here.", "");
+  // let choice = prompt("Enter your choice here.", "");
 
   if (choice !== null) {
     choice = choice.toLowerCase()
   } else { 
-    console.log("was canceled");
+    alert("Input cancel. Try again pls.");
   }
   // console.log(choice);
   //check if the user has put the correct choice
@@ -80,19 +80,49 @@ function playRound(humanChoice, computerChoice) {
 }
 
 
-function playGame() {
-  let rounds = 5;
-  while (rounds > 0) {
-    const humanSelection = getHumanChoice();
+function playGame(choise) {
+  // let rounds = 5;
+  // while (rounds > 0) {
+    const humanSelection = choise;
     const computerSelection = getComputerChoice();
-  
-    console.log(playRound(humanSelection, computerSelection));
+    
+    
+    displayResults.textContent = playRound(humanSelection, computerSelection);
     let gameScore = `Score: player: ${humanScore} , computer: ${computerScore}`;
-    console.log(gameScore);
-    rounds--;
-  }
+    displayScore.textContent = gameScore;
+    
+    if (humanScore === 5) {
+      displayWiner.textContent = `Computer Score:${humanScore}: Computer WIINN!!!`;
+    } else if (computerScore === 5) {
+      displayWiner.textContent = `Computer Score:${computerScore}: Computer WIINN!!!`;
+
+    }
+  //   rounds--;
+  // }
 }
 
-playGame();
+const button = document.querySelectorAll("button");
+const displayResults = document.createElement('div');
+const displayScore = document.createElement('div');
+const displayWiner = document.createElement('div');
+
+const divContainer = document.querySelector('.button-container');
+divContainer.appendChild(displayResults);
+divContainer.appendChild(displayScore);
+divContainer.appendChild(displayWiner);
 
 
+
+
+button.forEach((button) => {
+  button.addEventListener('click',() => {
+    // console.log(button.id)
+    if (button.if === 'paper') {
+      playGame('paper');
+    } else if (button.id === 'rock') {
+      playGame('rock');
+    } else {
+      playGame('scissor');
+    }
+  })
+})
